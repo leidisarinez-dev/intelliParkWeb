@@ -39,6 +39,12 @@
           />
         </label>
 
+        @if (vehicleForm.controls.vehicle_plate.touched && vehicleForm.controls.vehicle_plate.invalid) {
+          <small class="field-error">
+            La placa es obligatoria y debe tener un formato válido (ej. ABC123 para carro o ABC12D para moto).
+          </small>
+        }
+
         <label>
           Tipo de vehículo
           <select formControlName="vehicle_type">
@@ -84,6 +90,12 @@
             placeholder="ABC123"
           />
         </label>
+
+        @if (searchForm.controls.vehicle_plate.touched && searchForm.controls.vehicle_plate.invalid) {
+          <small class="field-error">
+            Ingresa una placa con formato válido (ej. ABC123 o ABC12D).
+          </small>
+        }
 
         <button type="submit" [disabled]="isLoading()">
           Buscar vehículo

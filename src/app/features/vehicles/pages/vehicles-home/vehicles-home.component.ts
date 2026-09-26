@@ -4,6 +4,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Vehicle, CreateVehicleRequest } from '../../interfaces/vehicles.interfaces';
 import { VehiclesService } from '../../services/vehicles.service';
 
+// Formato de placa colombiana:
+// Carro: 3 letras + 3 dígitos (ABC123). Moto: 3 letras + 2 dígitos + letra opcional (ABC12D o ABC12).
+const PLATE_PATTERN = /^([a-zA-Z]{3}[0-9]{3})$|^([a-zA-Z]{3}[0-9]{2}[a-zA-Z]?)$/;
+
 @Component({
   selector: 'app-vehicles-home',
   standalone: true,
@@ -25,14 +29,14 @@ export class VehiclesHomeComponent {
   readonly errorMessage = signal('');
 
   readonly vehicleForm = this.formBuilder.nonNullable.group({
-    vehicle_plate: ['', [Validators.required, Validators.minLength(5)]],
+    vehicle_plate: ['', [Validators.required, Validators.pattern(PLATE_PATTERN)]],
     vehicle_type: ['carro', [Validators.required]],
     vehicle_brand: ['', [Validators.required]],
     vehicle_color: ['', [Validators.required]]
   });
 
   readonly searchForm = this.formBuilder.nonNullable.group({
-    vehicle_plate: ['', [Validators.required, Validators.minLength(5)]]
+    vehicle_plate: ['', [Validators.required, Validators.pattern(PLATE_PATTERN)]]
   });
 
   ngOnInit(): void {
