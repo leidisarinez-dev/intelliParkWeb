@@ -90,6 +90,16 @@ export class AuthService {
     return JSON.parse(storedUser) as AuthUser;
   }
 
+  // Devuelve el rol del usuario autenticado (o null si no hay sesión)
+  getRole(): AuthUser['user_role'] | null {
+    return this.getStoredUser()?.user_role ?? null;
+  }
+
+  // true solo cuando el usuario en sesión es administrador
+  isAdmin(): boolean {
+    return this.getRole() === 'administrador';
+  }
+
   // Método privado: verifica si existe sesión guardada
   private hasStoredSession(): boolean {
     return !!localStorage.getItem(this.tokenKey);

@@ -25,16 +25,18 @@
         routerLink="/payments"
         routerLinkActive="active"
       >Pagos</a>
-      <a
-        class="menu-item"
-        routerLink="/users"
-        routerLinkActive="active"
-      >Usuarios</a>
-      <a
-        class="menu-item"
-        routerLink="/reports"
-        routerLinkActive="active"
-      >Reportes</a>
+      @if (isAdmin) {
+        <a
+          class="menu-item"
+          routerLink="/users"
+          routerLinkActive="active"
+        >Usuarios</a>
+        <a
+          class="menu-item"
+          routerLink="/reports"
+          routerLinkActive="active"
+        >Reportes</a>
+      }
       <!--<a class="menu-item" href="javascript:void(0)">Configuración</a>-->
     </nav>
   </aside>
@@ -47,7 +49,7 @@
       </div>
 
       <div class="topbar-actions">
-        <span class="profile-chip">Mauricio</span>
+        <span class="profile-chip">{{ userName }}</span>
         <button type="button" (click)="logout()">Cerrar sesión</button>
       </div>
     </header>

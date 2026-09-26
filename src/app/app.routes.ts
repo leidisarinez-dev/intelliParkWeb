@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/auth/auth.guard';
+import { roleGuard } from './core/auth/role.guard';
 /* Autenticación  */
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { LoginComponent } from './features/auth/login/login.component';
@@ -63,11 +64,15 @@ export const routes: Routes = [
       },
       {
         path: 'users',
-        component: UsersHomeComponent
+        component: UsersHomeComponent,
+        canActivate: [roleGuard],
+        data: { roles: ['administrador'] }
       },
       {
         path: 'reports',
-        component: ReportsHomeComponent
+        component: ReportsHomeComponent,
+        canActivate: [roleGuard],
+        data: { roles: ['administrador'] }
       },
     ]
   },
