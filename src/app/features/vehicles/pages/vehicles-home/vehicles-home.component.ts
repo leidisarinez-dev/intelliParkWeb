@@ -25,7 +25,7 @@ export class VehiclesHomeComponent {
   readonly errorMessage = signal('');
 
   readonly vehicleForm = this.formBuilder.nonNullable.group({
-    vehicle_plate: ['', [Validators.required, Validators.minLength(5)]],
+    vehicle_plate: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(8)]],
     vehicle_type: ['carro', [Validators.required]],
     vehicle_brand: ['', [Validators.required]],
     vehicle_color: ['', [Validators.required]]
